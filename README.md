@@ -4,7 +4,7 @@
 ---
 This project has been built using Django 3, and Python 3.
 
-For more details on dependencies, please check [requirements.txt]().
+For more details on dependencies, please check [requirements.txt](https://github.com/tmczqq/sda-event-manager/blob/main/requirements.txt).
 
 ## Getting Started
 ---
