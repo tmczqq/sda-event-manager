@@ -36,7 +36,10 @@ Add https://github.com/tmczqq/sda-event-manager.git to remote following these [i
 
 ### Configure the virtual environment
 If you have Python3 already configured as the default version for your computer, just run:
-`virtualenv ./env`
+
+```
+virtualenv ./env
+```
 
 ### Install dependecies and migrate the database
 If you are in Mac or Linux:
