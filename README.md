@@ -1,8 +1,8 @@
 # Event Manger
-***
+---
 ## Stack
 ---
-This project has been built using Django 3, Bootstrap, and Python 3.
+This project has been built using Django 3, and Python 3.
 
 For more details on dependencies, please check [requirements.txt]().
 
@@ -16,10 +16,14 @@ It usually comes pre-installed in Mac and Linux but in Windows you need to run t
 ### Install virtualenv
 Also make sure you have [virtualenv](https://virtualenv.pypa.io/en/latest/installation/) in your computer by running:
 
-`virtualenv --version`
+```
+virtualenv --version
+```
 If you get an error, use pip (included in Python3) with the following command:
 
-`pip install virtualenv`
+```
+pip install virtualenv
+```
 
 ### Configure your local repository
 If you haven't already, fork the project at https://github.com/tmczqq/sda-event-manager
@@ -36,27 +40,45 @@ If you have Python3 already configured as the default version for your computer,
 
 ### Install dependecies and migrate the database
 If you are in Mac or Linux:
-`./env/bin/pip install -r requirements.txt`
-`./env/bin/python manage.py migrate`
+```
+./env/bin/pip install -r requirements.txt
+```
+```
+./env/bin/python manage.py migrate
+```
 If you are in Windows:
-`pip install -r requirements.txt`
-`python manage.py migrate`
+```
+pip install -r requirements.txt
+```
+```
+python manage.py migrate
+```
 
 ### Rename the local_settings file
 Find the file `local_settings.example` and copy it in `local_settings.py` with the following command:
 
-`cp local_settings.example local_settings.py`
+```
+cp local_settings.example local_settings.py
+```
 
 ### Create a super user
 If you're in Mac or Linux run:
-`./env/bin/python manage.py createsuperuser`
+```
+./env/bin/python manage.py createsuperuser
+```
 If you are in Windows:
-`python manage.py createsuperuser`
+```
+python manage.py createsuperuser
+```
 
 ### Start the server
 If you're in Mac or Linux run:
-`./env/bin/python manage.py runserver`
+```
+./env/bin/python manage.py runserver
+```
 If you're in Windows:
-`python manage.py runserver`
+```
+python manage.py runserver
+```
 
 
