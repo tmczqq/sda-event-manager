@@ -1,0 +1,15 @@
+{% extends 'template.html' %}
+{% load bootstrap %}
+{% block title %} Aktualizacja wydarzenia {% endblock %}
+
+{% block site %}
+
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-outline-success">Aktualizacja wydarzenia</button>
+    </form>
+
+{% endblock %}
