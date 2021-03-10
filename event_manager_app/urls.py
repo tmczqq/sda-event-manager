@@ -1,5 +1,6 @@
 from django.urls import path
-from event_manager_app.views import AllEventsView
+from event_manager_app.views import EventCreateView, AllEventsView, EventUpdateView, EventDeleteView, EventFullView, \
+    SearchView, RegisterView, AddCommentView
 
 
 
@@ -11,5 +12,6 @@ urlpatterns = [
     path('fview/<int:id>', EventFullView, name="fview_event"),
     path('search/', SearchView, name="search_event"),
     path('register/', RegisterView, name="register"),
+    path('fview/<int:id>/comment/', AddCommentView.as_view(), name="add_comment"),
 
 ]
