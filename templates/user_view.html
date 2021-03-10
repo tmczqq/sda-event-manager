@@ -1,0 +1,23 @@
+{% extends 'template.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %} Szczegóły wydarzenia {% endblock %}
+{% load social_share %}
+
+{% block site %}
+
+    <div class="colbgc tmc">
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Change">
+        </form>
+
+
+        <a href="{% url 'read_events' %}">Powrót</a>
+
+    </div>
+
+
+{% endblock %}
