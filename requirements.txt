@@ -4,6 +4,7 @@ colorama==0.4.4
 decorator==4.4.2
 Django==3.1.7
 django-bootstrap-form==3.4
+django-crispy-forms==1.11.1
 django-extensions==3.1.1
 django-social-share==2.2.1
 djangorestframework==3.12.2
@@ -19,4 +20,3 @@ pytz==2021.1
 sqlparse==0.4.1
 traitlets==5.0.5
 wcwidth==0.2.5
-
