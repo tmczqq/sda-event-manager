@@ -29,3 +29,7 @@ class Event(models.Model):
 
     def event_date(self):
         return "{} ({} - {})".format(self.event_name, self.date_from,self.date_to)
+
+
+
+
