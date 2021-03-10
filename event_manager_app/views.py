@@ -22,3 +22,11 @@ def EventUpdateView(request, id):
         form.save()
         return redirect(AllEventsView)
     return render(request, 'update_event.html', {'form': form})
+
+def EventDeleteView(request, id):
+    event = get_object_or_404(Event, pk=id)
+    if request.method == "POST":
+        event.delete()
+        return redirect(AllEventsView)
+
+    return render(request, 'delete_event.html', {'form': event})
