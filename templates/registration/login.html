@@ -1,0 +1,16 @@
+{% extends 'template.html' %}
+{% load bootstrap %}
+{% block title %} Strona główna {% endblock %}
+
+
+{% block site %}
+
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-outline-success">Zaloguj</button>
+    </form>
+
+
+{% endblock %}
