@@ -1,0 +1,36 @@
+{% extends 'template.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %} Szczegóły szukania {% endblock %}
+
+{% block site %}
+
+
+    {% if posts %}
+        <p> Znalezione wyniki dla {{ posts.search }}:</p>
+        {% for event in posts %}
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static colbgc">
+                    <strong class="d-inline-block mb-2 text-primary">{{ event.show_category }}</strong>
+                    <h3 class="mb-0">{{ event.event_name }}</h3>
+                    <div class="mb-1 text-muted">Od {{ event.date_from|date:"d M Y - H:i " }}</div>
+                    <div class="mb-1 text-muted"> Do {{ event.date_to|date:"d M Y - H:i " }}</div>
+                    <p class="card-text mb-auto">{{ event.description|slice:":50" }}</p>
+                    <a href="{% url 'fview_event' event.id %}" class="stretched-link">Więcej</a>
+                </div>
+                <div class="col-auto d-none d-lg-block colbgc">
+                    <svg class="bd-placeholder-img" width="150" height="200" xmlns="http://www.w3.org/2000/svg"
+                         role="img"
+                         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <img src="/media/{{ event.event_image }}" width="250" height="250"/>
+                        <rect width="100%" height="100%" fill="#55595c"/>
+                    </svg>
+
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Twoje wyszukanie nie zostało znalezione</p>
+        <img src="https://thumbs.dreamstime.com/b/puszysty-chomik-104747602.jpg">
+    {% endif %}
+{% endblock %}

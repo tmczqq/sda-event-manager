@@ -1,0 +1,71 @@
+{% extends 'template.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %} Szczegóły wydarzenia {% endblock %}
+{% load social_share %}
+
+{% block site %}
+
+    <div class="colbgc tmc">
+        <p><img class="vc" src="/media/{{ event.event_image }}" width="100%" height="350"/></p>
+        <p>{{ event.event_name }}</p>
+        <p>{{ event.show_category }}</p>
+        <p>Od {{ event.date_from|date:"d M Y - H:i " }} </p>
+        <p> Do {{ event.date_to|date:"d M Y - H:i " }}</p>
+        <p> Bierze udział
+            <form action="{% url 'go_event' goevent.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit", name="", value="",class="btn btn-primary">Weź udział</button>
+
+        </form>
+
+
+        </p>
+
+
+        <p class="description">{{ event.description }}</p>
+
+        <p>
+
+        <div class="embed-responsive embed-responsive-16by9 vc">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/LH558FTI4kI" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;
+                    picture-in-picture" allowfullscreen></iframe>
+        </div>
+        </p>
+
+
+    </div>
+
+    <div class="colbgc tmc">
+
+
+        {% if not event.comments.all %}
+            <h2>Komentarze... </h2>
+
+            <p>brak komentarzy... <a href="{% url 'add_comment' event.id %}"></p>
+            Dodaj jakiś</a>
+
+
+
+
+        {% else %}
+            <p><h2>Komentarze... </h2>
+            <button class="btn btn-outline-primary"><a href="{% url 'add_comment' event.id %}">Dodaj komentarz</a>
+            </button></p>
+            {% for comment in event.comments.all %}
+                <div class="colbgc tmc border">
+                    <strng>
+                        <p>napisany przez <b>{{ comment.name }}</b> -
+                            {{ comment.date_added }}</p>
+                    </strng>
+                    <p class="fst-italic">{{ comment.body }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+
+
+{% endblock %}

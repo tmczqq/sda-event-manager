@@ -38,3 +38,17 @@ def EventCreateView(request):
         form.save()
         return redirect(AllEventsView)
     return render(request, 'create_event.html', {'form': form})
+
+
+def EventFullView(request, id):
+    event = get_object_or_404(Event, pk=id)
+    return render(request, 'event_full_view.html', {'event': event})
+
+def SearchView(request):
+    post = request.GET.get('search')
+    if post:
+        posts = Event.objects.filter(Q(event_name__icontains=post))
+    else:
+        posts = Event.objects.all().order_by("-date_created")
+
+    return render(request, 'search_event.html', {'posts': posts})
