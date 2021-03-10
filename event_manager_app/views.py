@@ -62,3 +62,22 @@ def RegisterView(response):
     else:
         register = RegisterForm()
     return render(response, "registration/register.html", {"form": register})
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'add_comment.html'
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['id']
+        return super().form_valid(form)
+
+    # fields = '__all__'
+
+    # success_url = reverse_lazy("fview_event",kwargs={'id':1})
+
+    def get_success_url(self, **kwargs):
+        if kwargs != None:
+            return reverse_lazy('fview_event', kwargs={'id': self.kwargs['id']})
+        else:
+            return reverse_lazy('fview_event', args=(self.object.id,))
