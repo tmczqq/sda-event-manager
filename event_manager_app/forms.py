@@ -12,3 +12,16 @@ class EventForm(ModelForm):
         model = Event
         fields = ['event_name', 'category', 'date_from', 'date_to', 'description', 'event_image']
 
+class RegisterForm(UserCreationForm):
+    male = 'M'
+    female = 'F'
+    blank = '-'
+    email = forms.EmailField()
+    first_name = forms.CharField(max_length=30, required=False)
+    last_name = forms.CharField(max_length=30, required=False)
+    sex = ((male, 'Kobieta'), (female, 'Mężczyzna'), (blank, 'Wybierz płeć'),)
+    sex = forms.ChoiceField(choices=sex, required=True, label='Sex')
+
+    class Meta:
+        model = User
+        fields = ["username", "email", "password1", "password2"]

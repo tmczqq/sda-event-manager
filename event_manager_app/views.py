@@ -52,3 +52,13 @@ def SearchView(request):
         posts = Event.objects.all().order_by("-date_created")
 
     return render(request, 'search_event.html', {'posts': posts})
+
+def RegisterView(response):
+    if response.method == "POST":
+        register = RegisterForm(response.POST)
+        if register.is_valid():
+            register.save()
+        return redirect("read_events")
+    else:
+        register = RegisterForm()
+    return render(response, "registration/register.html", {"form": register})
