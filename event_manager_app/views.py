@@ -30,3 +30,11 @@ def EventDeleteView(request, id):
         return redirect(AllEventsView)
 
     return render(request, 'delete_event.html', {'form': event})
+
+def EventCreateView(request):
+    form = EventForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect(AllEventsView)
+    return render(request, 'create_event.html', {'form': form})
