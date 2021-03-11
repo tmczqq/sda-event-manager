@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-czy na pewno chcesz usunac film
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">delete event</button>
-</form>
-</body>
-</html>
+{% extends 'template.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %} Usuń event {% endblock %}
+
+
+{% block site %}
+
+    <h1>czy na pewno chcesz usunac film</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">delete event</button>
+    </form>
+
+{% endblock %}
