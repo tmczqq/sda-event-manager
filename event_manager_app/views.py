@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Event
+from .models import Event, Comment
+from .forms import EventForm, RegisterForm, CommentForm
 from django.db.models import Q
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -8,10 +9,13 @@ from django.views.generic.edit import CreateView
 from django.views import generic
 from django.urls import reverse_lazy
 
+def EventCreateView(request):
+    form = EventForm(request.POST or None, request.FILES or None)
 
-def AllEventsView(request):
-    all_events = Event.objects.all()
-    return render(request, 'index.html', {'events': all_events})
+    if form.is_valid():
+        form.save()
+        return redirect(AllEventsView)
+    return render(request, 'create_event.html', {'form': form})
 
 
 def EventUpdateView(request, id):
@@ -23,6 +27,7 @@ def EventUpdateView(request, id):
         return redirect(AllEventsView)
     return render(request, 'update_event.html', {'form': form})
 
+
 def EventDeleteView(request, id):
     event = get_object_or_404(Event, pk=id)
     if request.method == "POST":
@@ -31,18 +36,22 @@ def EventDeleteView(request, id):
 
     return render(request, 'delete_event.html', {'form': event})
 
-def EventCreateView(request):
-    form = EventForm(request.POST or None, request.FILES or None)
 
-    if form.is_valid():
-        form.save()
-        return redirect(AllEventsView)
-    return render(request, 'create_event.html', {'form': form})
+def AllEventsView(request):
+    all_events = Event.objects.all()
+    return render(request, 'index.html', {'events': all_events})
 
 
 def EventFullView(request, id):
     event = get_object_or_404(Event, pk=id)
     return render(request, 'event_full_view.html', {'event': event})
+
+
+def CatView(request):
+    cat = Event.objects.filter(Q(category__icontains=request))
+
+    return render(request, 'category.html', {'events': cat})
+
 
 def SearchView(request):
     post = request.GET.get('search')
@@ -53,6 +62,7 @@ def SearchView(request):
 
     return render(request, 'search_event.html', {'posts': posts})
 
+
 def RegisterView(response):
     if response.method == "POST":
         register = RegisterForm(response.POST)
@@ -62,6 +72,7 @@ def RegisterView(response):
     else:
         register = RegisterForm()
     return render(response, "registration/register.html", {"form": register})
+
 
 class AddCommentView(CreateView):
     model = Comment
@@ -81,3 +92,4 @@ class AddCommentView(CreateView):
             return reverse_lazy('fview_event', kwargs={'id': self.kwargs['id']})
         else:
             return reverse_lazy('fview_event', args=(self.object.id,))
+
