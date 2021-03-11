@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Event, Comment, Participation
+from .models import Event, Comment
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
