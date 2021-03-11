@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Event, Comment, Participation
+from .models import Event, Comment
 from .forms import EventForm, RegisterForm, CommentForm
 from django.db.models import Q
 from django.contrib.auth import login, authenticate
