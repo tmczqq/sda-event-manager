@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Event, Comment
+from .models import Event, Comment, Participation
 from .forms import EventForm, RegisterForm, CommentForm
 from django.db.models import Q
 from django.contrib.auth import login, authenticate
@@ -8,7 +8,21 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.views import generic
 from django.urls import reverse_lazy
+from rest_framework import viewsets
+from django.contrib.auth.models import User
+from .serializers import UserSerializer,EvenSerializer
+from django.contrib.auth.decorators import login_required
 
+
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EvenSerializer
+
+@login_required
 def EventCreateView(request):
     form = EventForm(request.POST or None, request.FILES or None)
 
@@ -17,7 +31,7 @@ def EventCreateView(request):
         return redirect(AllEventsView)
     return render(request, 'create_event.html', {'form': form})
 
-
+@login_required
 def EventUpdateView(request, id):
     event = get_object_or_404(Event, pk=id)
     form = EventForm(request.POST or None, request.FILES or None, instance=event)
@@ -27,7 +41,7 @@ def EventUpdateView(request, id):
         return redirect(AllEventsView)
     return render(request, 'update_event.html', {'form': form})
 
-
+@login_required
 def EventDeleteView(request, id):
     event = get_object_or_404(Event, pk=id)
     if request.method == "POST":
@@ -41,7 +55,7 @@ def AllEventsView(request):
     all_events = Event.objects.all()
     return render(request, 'index.html', {'events': all_events})
 
-
+@login_required
 def EventFullView(request, id):
     event = get_object_or_404(Event, pk=id)
     return render(request, 'event_full_view.html', {'event': event})
@@ -92,4 +106,3 @@ class AddCommentView(CreateView):
             return reverse_lazy('fview_event', kwargs={'id': self.kwargs['id']})
         else:
             return reverse_lazy('fview_event', args=(self.object.id,))
-
