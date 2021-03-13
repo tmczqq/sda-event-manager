@@ -12,15 +12,10 @@
         <p>{{ event.show_category }}</p>
         <p>Od {{ event.date_from|date:"d M Y - H:i " }} </p>
         <p> Do {{ event.date_to|date:"d M Y - H:i " }}</p>
-        <p> Bierze udział
-            <form action="{% url 'go_event' goevent.pk %}" method="post">
-            {% csrf_token %}
-            <button type="submit", name="", value="",class="btn btn-primary">Weź udział</button>
-
-        </form>
-
-
-        </p>
+        {% if user.is_authenticated %}
+        <p><a href="{% url 'delete_event' event.id %}">Usuń Event </a></p>
+        <p><a href="{% url 'update_event' event.id %}">Edytuj Event </a></p>
+        {% endif %}
 
 
         <p class="description">{{ event.description }}</p>
