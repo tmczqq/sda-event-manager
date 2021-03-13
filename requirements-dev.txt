@@ -3,6 +3,7 @@ backcall==0.2.0
 colorama==0.4.4
 decorator==4.4.2
 Django==3.1.7
+dj-static==0.0.6
 django-bootstrap-form==3.4
 django-crispy-forms==1.11.1
 django-extensions==3.1.1
