@@ -22,14 +22,26 @@ class Event(models.Model):
     date_from = models.DateTimeField(null=True, blank=True, default=None)
     date_to = models.DateTimeField(null=True, blank=True, default=None)
     description = models.TextField(validators=[MinLengthValidator(40)], max_length=500, blank=False)
-    event_image = models.ImageField(upload_to="event_image", height_field=600, width_field=500, max_length=1000,
-                                    null=True, blank=True)
+    event_image = models.ImageField(upload_to="event_image", null=True, blank=True)
 
     def __str__(self):
         return self.event_date()
 
     def event_date(self):
-        return "{} ({} - {})".format(self.event_name, self.date_from,self.date_to)
+        return "{} ({} - {})".format(self.event_name, self.date_from, self.date_to)
+
+    def show_category(self):
+        if self.category == 0:
+            return r"Inne"
+        if self.category == 1:
+            return r"Kino"
+        if self.category == 2:
+            return r"Teatr"
+        if self.category == 3:
+            return r"Koncert"
+
+    def show_date_event(self):
+        return "{} - {}".format(self.date_from, self.date_to)
 
 
 class Comment(models.Model):
