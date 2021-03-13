@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'template.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %} Dodaj komentarz {% endblock %}
 
-</body>
-</html>
+
+{% block site %}
+
+
+    <h1>Dodaj komentarz</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button class="btn btn-outline-success">Dodaj komentarz</button>
+    </form>
+
+
+
+{% endblock %}
